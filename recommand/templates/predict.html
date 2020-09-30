@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+<head>
+<title>Predict the WebPage</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<link href="{% static 'css/style2.css' %}" rel="stylesheet" />
+
+<link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+<link href="{% static 'css/now-ui-kit.css' %}" rel="stylesheet" />
+<link href="{% static 'css/medium-editor.min.css' %}" rel="stylesheet">
+<!--//fonts-->
+</head>
+<body style="background-image: url('{% static 'images/2.jpg' %}')">
+<!--background-->
+<nav class="navbar navbar-expand-lg navbar-transparent" >
+        <div class="container">
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" >
+                <ul class="navbar-nav nav-tabs">
+
+                    <li class="nav-item"><a href="{% url 'accounts:profile' pk=user_id %}" class="btn btn-neutral">Profile</a></li>
+                      <li class="nav-item"><a href="{% url 'accounts:logout' %}" class="btn btn-neutral">Logout</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+<h1>Predict your Next WebPage</h1>
+    <div class="bg-agile">
+	<div class="book-appointment">
+	<h2>Enter your last six visited webpages</h2>
+
+  {% if predicted %}
+<div class="card" role="alert">
+<div class="header-main">
+<h4 class="table-success text-center">Your predicted webpage is</h4>
+</div>
+<div class="card-body">
+      <div class="table-responsive justify-content-center">
+                       <table class="table">
+                           <thead>
+                               <tr>
+                                   <th>Algorithm</th>
+                                   <th>Fuzzy C-Mean Algorithm</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               <tr class="{{colors.recom}}">
+                                   <td>Recommended</td>
+                                   {% if predictions == 1 %}
+                                   <td>Front Page<td>
+                                    {% elif predictions == 2 %}
+                                    <td>Weather</td>
+                                    {% elif predictions == 3 %}
+                                    <td>Health</td>
+                                    {% elif predictions == 4 %}
+                                    <td>Living</td>
+                                    {% elif predictions == 5 %}
+                                    <td>Business</td>
+                                    {% elif predictions == 6 %}
+                                    <td>News</td>
+                                    {% elif predictions == 7 %}
+                                    <td>Tech</td>
+                                    {% elif predictions == 8 %}
+                                    <td>Local</td>
+                                    {% elif predictions == 9 %}
+                                    <td>Opinion</td>
+                                    {% elif predictions == 10 %}
+                                    <td>On Air</td>
+                                    {% elif predictions == 11 %}
+                                    <td>Misc</td>
+                                    {% elif predictions == 12 %}
+                                    <td>Sports</td>
+                                    {% elif predictions == 13 %}
+                                    <td>Summary</td>
+                                    {% elif predictions == 14 %}
+                                    <td>BBS</td>
+                                    {% elif predictions == 15 %}
+                                    <td>Travel</td>
+                                    {% elif predictions == 16 %}
+                                    <td>MSN News</td>
+                                    {% elif predictions == 17 %}
+                                    <td>MSN Sports</td>
+                                    {% else %}
+                                    <td>{{predictions}}</td>
+                                   <!-- <td>{{predictions}}</td> -->
+                                   {% endif %}
+                               </tr>
+                               <!-- <tr class={{colors.SVC}}>
+                                   <td>Support Vector Classifier</td>
+                                   <td>{{predictions.SVC}}</td>
+                               </tr>
+                               <tr class={{colors.NB}}>
+                                   <td>Naive Bayes</td>
+                                   <td>{{predictions.NaiveBayes}}</td>
+                               </tr>
+                               <tr class={{colors.DT}}>
+                                   <td>Decision Tree</td>
+                                   <td>{{predictions.DecisionTree}}</td>
+                               </tr>
+                               <tr class={{colors.NN}}>
+                                   <td>Neural Network</td>
+                                   <td>{{predictions.NeuralNetwork}}</td>
+                               </tr>
+
+                               <tr class={{colors.KNN}}>
+                                   <td>KNN</td>
+                                   <td>{{predictions.KNN}}</td>
+                               </tr> -->
+                           </tbody>
+
+                       </table>
+                   </div>
+               </div>
+             </div>
+
+  {% endif %}
+
+			<form method="post">
+        {% csrf_token %}
+        <div class="left-agileits-w3layouts same">
+          <div class="gaps">
+            <p>Web Page 1<p>
+            {{form.WebPage1}}
+          </div>
+
+					<div class="gaps">
+						<p>Web Page 2</p>
+							{{form.WebPage2}}
+					</div>
+
+          <div class="gaps">
+            <p>Web Page 3</p>
+              {{form.WebPage3}}
+          </div>
+
+					<div class="gaps">
+						<p>Web Page 4</p>
+							{{form.WebPage4}}
+					</div>
+
+					<div class="gaps">
+						<p>Web Page 5</p>
+							{{form.WebPage5}}
+					</div>
+
+					<div class="gaps">
+						<p>Web Page 6</p>
+						   {{form.WebPage6}}
+					</div>
+<!-- 
+					<div class="gaps">
+						<p>Resting  Electrocardiographic Result</p>
+						{{form.resting_ecg}}
+					</div>
+
+					<div class="gaps">
+						<p>Maximum Heart Rate</p>
+						{{form.max_heart_rate}}
+					</div>
+
+					<div class="gaps">
+						<p>Excercise Induced Angina</p>
+						{{form.exercise_induced_angina}}
+					</div>
+
+					<div class="gaps">
+						<p>ST Depression</p>
+						{{form.st_depression}}
+					</div>
+
+				</div>
+
+				<div class="right-agileinfo same">
+
+          <div class="gaps">
+						<p>Slope of the peak exercise ST segment </p>
+				      {{form.st_slope}}
+					</div>
+
+          <div class="gaps">
+            <p>Number of major vessels (0-3) colored by flourosopy</p>
+              {{form.number_of_vessels}}
+          </div>
+
+          <div class="gaps">
+            <p>Thalium Scan Results</p>
+              {{form.thallium_scan_results}}
+          </div> -->
+
+				</div>
+
+				<div class="clear"></div>
+				<input type="submit" value="Predict" class="btn btn-primary">
+			</form>
+		</div>
+   </div>
+   <!--copyright-->
+
+		<!--//copyright-->
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<!-- Calendar -->
+				<link rel="stylesheet" href="css/jquery-ui.css" />
+				<script src="js/jquery-ui.js"></script>
+
+			<!-- //Calendar -->
+
+</body>
+</html>

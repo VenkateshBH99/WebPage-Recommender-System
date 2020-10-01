@@ -3,7 +3,7 @@
 
 
 
-It supports following features:
+It supports the following features:
 
 *	Login/ Sign Up 
 *	Viewing and Editing Profile 

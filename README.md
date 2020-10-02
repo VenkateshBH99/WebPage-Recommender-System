@@ -1,5 +1,5 @@
 # WebPage-Recommender-System
->The aim of this project is to predict WebPage based on previous 6 six webpage searched i.e., based on previous 6 parameters.
+>The aim of this project is to predict the WebPage based on previous 6 six webpage searched i.e., based on previous 6 parameters.
 
 
 
